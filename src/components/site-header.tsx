@@ -23,7 +23,7 @@ export function SiteHeader() {
           <Logo className="size-8" />
           <Link
             href="/"
-            className="flex items-center gap-2 px-2 text-xl font-bold tracking-tighter"
+            className="flex items-center gap-2 px-2 text-xl font-bold tracking-tighter -ml-2 md:ml-0"
           >
             RazEssentials
           </Link>
