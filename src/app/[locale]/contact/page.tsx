@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 export default function ContactPage() {
+  const t = useTranslations("contactPage");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -17,8 +19,8 @@ export default function ContactPage() {
     // Here you would typically send the form data to your backend
     console.log("Form submitted:", { name, email, message });
     toast({
-      title: "Message Sent",
-      description: "We've received your message and will get back to you soon.",
+      title: t("toast.title"),
+      description: t("toast.description"),
     });
     setName("");
     setEmail("");
@@ -29,12 +31,11 @@ export default function ContactPage() {
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-lg">
         <h1 className="text-center text-2xl font-bold text-primary sm:text-3xl">
-          Get in touch
+          {t("title")}
         </h1>
 
         <p className="mx-auto mt-4 max-w-md text-center text-muted-foreground">
-          Have a question or feedback? We'd love to hear from you. Fill out the
-          form below and we'll get back to you as soon as possible.
+          {t("description")}
         </p>
 
         <form
@@ -43,12 +44,12 @@ export default function ContactPage() {
         >
           <div>
             <label htmlFor="name" className="sr-only">
-              Name
+              {t("form.name.label")}
             </label>
             <Input
               type="text"
               id="name"
-              placeholder="Name"
+              placeholder={t("form.name.placeholder")}
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -57,12 +58,12 @@ export default function ContactPage() {
 
           <div>
             <label htmlFor="email" className="sr-only">
-              Email
+              {t("form.email.label")}
             </label>
             <Input
               type="email"
               id="email"
-              placeholder="Email address"
+              placeholder={t("form.email.placeholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -71,11 +72,11 @@ export default function ContactPage() {
 
           <div>
             <label htmlFor="message" className="sr-only">
-              Message
+              {t("form.message.label")}
             </label>
             <Textarea
               id="message"
-              placeholder="Your message"
+              placeholder={t("form.message.placeholder")}
               rows={4}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -84,7 +85,7 @@ export default function ContactPage() {
           </div>
 
           <Button type="submit" className="w-full">
-            Send Message
+            {t("form.submit")}
           </Button>
         </form>
       </div>

@@ -1,11 +1,12 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Scissors } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
+  const t = useTranslations("hero");
+
   return (
     <div className="relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-xl border border-border">
       <Image
@@ -19,19 +20,18 @@ export function Hero() {
       <div className="z-10 flex h-full flex-col items-center justify-center gap-4 p-8 text-center">
         <Scissors className="h-16 w-16 text-primary" />
         <h1 className="text-5xl font-bold tracking-tight text-foreground">
-          BarberStyle Essentials
+          {t("title")}
         </h1>
         <p className="text-muted-foreground mb-4 text-xl max-w-2xl">
-          Sharpen your style with our premium barber and hair care products.
-          From classic cuts to modern fades, we've got you covered.
+          {t("subtitle")}
         </p>
         <Button
           asChild
           size="lg"
-          className="relative overflow-hidden group transition-colors duration-300 hover:scale-110 transition-all duration-300 "
+          className="relative overflow-hidden group transition-colors duration-300 hover:scale-110 transition-all duration-300"
         >
           <Link href="#products" className="z-10 relative">
-            Shop Now
+            {t("shopNow")}
           </Link>
         </Button>
       </div>

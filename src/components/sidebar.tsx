@@ -17,8 +17,6 @@ import { Menu, Search } from "lucide-react";
 import Link from "next/link";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export function Sidebar() {
   return (
@@ -51,21 +49,21 @@ export function Sidebar() {
             </Link>
           </SheetClose>
           <SheetClose asChild>
-            <Link href="/about">
+            <Link href="/about" className="w-full">
               <Button className="justify-start" variant="ghost">
                 About
               </Button>
             </Link>
           </SheetClose>
           <SheetClose asChild>
-            <Link href="/services">
+            <Link href="/services" className="w-full">
               <Button className="justify-start" variant="ghost">
                 Services
               </Button>
             </Link>
           </SheetClose>
           <SheetClose asChild>
-            <Link href="/contact">
+            <Link href="/contact" className="w-full">
               <Button className="justify-start" variant="ghost">
                 Contact
               </Button>

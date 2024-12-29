@@ -6,6 +6,7 @@ import {
 import { productListSchema } from "@/lib/schema";
 import Link from "next/link";
 import { z } from "zod";
+import { useTranslations } from "next-intl";
 
 export function ProductList({
   list,
@@ -14,6 +15,8 @@ export function ProductList({
   list: z.infer<typeof productListSchema>;
   showViewAll?: boolean;
 }) {
+  const t = useTranslations("productList");
+
   return (
     <div className="relative mb-8 flex flex-col items-center gap-8">
       {list.data.length > 0 ? (
@@ -36,7 +39,7 @@ export function ProductList({
               variant="outline"
               className="animate-slide-up"
             >
-              <Link href="/products">View all products</Link>
+              <Link href="/products">{t("viewAllProducts")}</Link>
             </Button>
           )}
         </>
@@ -48,16 +51,16 @@ export function ProductList({
             ))}
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 text-center text-sm">
-            <div className="font-medium">No products found.</div>
+            <div className="font-medium">{t("noProducts.title")}</div>
             <div className="text-muted-foreground mb-4">
-              Add products to your store to get started.
+              {t("noProducts.description")}
             </div>
             <Button asChild size="sm" variant="outline">
               <a
                 href="https://dashboard.stripe.com/test/products"
                 target="_blank"
               >
-                Add Product
+                {t("noProducts.addProduct")}
               </a>
             </Button>
           </div>

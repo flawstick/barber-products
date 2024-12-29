@@ -1,52 +1,43 @@
+"use server";
+
 import { getProducts } from "@/lib/products";
 import { ProductBuyForm } from "@/components/product-buy-form";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, Star } from "lucide-react";
+import { getMessages } from "next-intl/server";
+import { isRTL } from "@/lib/rtl";
 
 export default async function ProductPage({
-  params,
+  params: { locale, id },
 }: {
-  params: Promise<{ id: string }>;
+  params: { locale: string; id: string };
 }) {
-  const { id } = await params;
+  const messages = await getMessages({ locale });
   const products = await getProducts({ limit: 100 });
   const product = products.data.find((p: any) => p.id === id);
+
+  let t = messages.productPage as any; // AbstractIntlMessages
 
   if (!product) {
     notFound();
   }
 
-  // Dummy reviews data
-  const reviews = [
-    {
-      id: 1,
-      author: "John D.",
-      rating: 5,
-      comment: "Great product! Really improved my styling routine.",
-    },
-    {
-      id: 2,
-      author: "Sarah M.",
-      rating: 4,
-      comment: "Good quality, but a bit pricey. Still worth it though.",
-    },
-    {
-      id: 3,
-      author: "Mike R.",
-      rating: 5,
-      comment: "Best hair product I've used. Highly recommend!",
-    },
-  ];
+  const reviews = [t.reviews.review1, t.reviews.review2, t.reviews.review3];
+  let rtl: boolean = isRTL(locale);
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8">
       <Button asChild variant="ghost" className="mb-8 text-lg">
         <Link href="/products" className="flex items-center">
-          <ArrowLeft className="mr-2 h-6 w-6" />
-          Back to Products
+          {rtl ? (
+            <ArrowRight className="ml-2 h-6 w-6" />
+          ) : (
+            <ArrowLeft className="mr-2 h-6 w-6" />
+          )}
+          {t.backToProducts}
         </Link>
       </Button>
       <div className="grid gap-12 md:grid-cols-2">
@@ -67,29 +58,19 @@ export default async function ProductPage({
             </p>
             <div className="text-lg text-muted-foreground mb-6">
               <p className="mb-4">{product.description}</p>
-              <p className="mb-4">
-                Crafted with precision and care, this product embodies the
-                essence of professional-grade hair care. Its unique formula is
-                designed to deliver exceptional results, whether you're a
-                seasoned stylist or an enthusiast looking to elevate your
-                grooming routine.
-              </p>
-              <p>
-                Experience the difference that comes from using a product
-                trusted by experts in the field. With its carefully selected
-                ingredients and innovative technology, this product not only
-                styles your hair but also nourishes and protects it, ensuring
-                that you look your best while maintaining optimal hair health.
-              </p>
+              <p className="mb-4">{t.description.crafted}</p>
+              <p>{t.description.experience}</p>
             </div>
             <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-2">Key Features:</h2>
+              <h2 className="text-xl font-semibold mb-2">
+                {t.keyFeaturesTitle}
+              </h2>
               <ul className="list-disc list-inside space-y-2">
-                <li>Professional-grade formula for salon-quality results</li>
-                <li>Long-lasting hold that keeps your style intact all day</li>
-                <li>Suitable for all hair types and textures</li>
-                <li>Nourishing ingredients that promote hair health</li>
-                <li>Cruelty-free and made with ethically sourced components</li>
+                <li>{t.keyFeatures[1]}</li>
+                <li>{t.keyFeatures[2]}</li>
+                <li>{t.keyFeatures[3]}</li>
+                <li>{t.keyFeatures[4]}</li>
+                <li>{t.keyFeatures[5]}</li>
               </ul>
             </div>
           </div>
@@ -100,11 +81,11 @@ export default async function ProductPage({
       </div>
 
       <section className="mt-16 animate-fade-in">
-        <h2 className="text-3xl font-bold mb-6">Customer Reviews</h2>
+        <h2 className="text-3xl font-bold mb-6">{t.customerReviews}</h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((review) => (
+          {reviews.map((review: any, index) => (
             <div
-              key={review.id}
+              key={index}
               className="bg-card p-6 rounded-lg border border-border"
             >
               <div className="flex items-center mb-4">

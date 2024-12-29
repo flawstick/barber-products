@@ -10,8 +10,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useDirection } from "@/hooks/use-direction";
+import { useTranslations } from "next-intl";
 
 export function Cart() {
+  const { direction } = useDirection();
+  const t = useTranslations("cart");
+
   return (
     <Sheet>
       <Tooltip>
@@ -23,26 +28,23 @@ export function Cart() {
               className="border-border size-8 shrink-0 border"
             >
               <CartIcon className="size-4" />
-              <span className="sr-only">Cart</span>
+              <span className="sr-only">{t("tooltip")}</span>
             </Button>
           </TooltipTrigger>
         </SheetTrigger>
-        <TooltipContent align="end">Cart</TooltipContent>
+        <TooltipContent align="end">{t("tooltip")}</TooltipContent>
         <SheetContent
-          side="right"
+          side={direction === "ltr" ? "right" : "left"}
           className="flex w-full flex-col justify-between p-4 pt-12 md:w-3/4"
         >
-          <SheetTitle className="absolute left-4 top-3 text-xl text-foreground">
-            Cart
-          </SheetTitle>
-          <div className="flex flex-col gap-3">
-            <p className="text-muted-foreground text-sm">
-              No items in your cart.
-            </p>
+          <SheetTitle className="absolute left-4 top-3 text-xl text-foreground" />
+          <div className="flex flex-col gap-2 rtl:mr-2">
+            <p className="text-foreground text-xl font-bold">{t("title")}</p>
+            <p className="text-muted-foreground text-sm">{t("emptyMessage")}</p>
           </div>
           <div className="flex flex-col gap-3">
             <Button variant="default" size="sm">
-              Proceed to Checkout
+              {t("checkoutButton")}
             </Button>
           </div>
         </SheetContent>

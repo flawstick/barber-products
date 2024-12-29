@@ -28,7 +28,7 @@ export function ProductListThumbnail({
               {product.price.display_amount}
             </div>
           </div>
-          <div className="ml-auto">
+          <div className="ltr:ml-auto rtl:mr-auto">
             <ProductBuyForm variantId={product.price.id} />
           </div>
         </div>
