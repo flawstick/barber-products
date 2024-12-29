@@ -9,8 +9,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Shopify Products and Checkout",
-  description: "A template to showcase Shopify products and a checkout flow.",
+  title: "Barber Products and Checkout",
+  description: "A template to showcase barber products and a checkout flow.",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
