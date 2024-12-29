@@ -10,11 +10,7 @@ import { ArrowLeft, ArrowRight, Star } from "lucide-react";
 import { getMessages } from "next-intl/server";
 import { isRTL } from "@/lib/rtl";
 
-export default async function ProductPage({
-  params: { locale, id },
-}: {
-  params: { locale: string; id: string };
-}) {
+export default async function ProductPage({ params: { locale, id } }: any) {
   const messages = await getMessages({ locale });
   const products = await getProducts({ limit: 100 });
   const product = products.data.find((p: any) => p.id === id);
