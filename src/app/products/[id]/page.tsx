@@ -1,3 +1,4 @@
+import { useParams } from "next/navigation";
 import { getProducts } from "@/lib/products";
 import { ProductBuyForm } from "@/components/product-buy-form";
 import { Button } from "@/components/ui/button";
@@ -6,13 +7,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Star } from "lucide-react";
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function ProductPage() {
+  const { id } = useParams();
   const products = await getProducts({ limit: 100 });
-  const product = products.data.find((p: any) => p.id === params.id);
+  const product = products.data.find((p: any) => p.id === id);
 
   if (!product) {
     notFound();
