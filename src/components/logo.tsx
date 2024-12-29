@@ -1,4 +1,4 @@
-export function Logo({ className, ...props }: React.ComponentProps<'svg'>) {
+export function Logo({ className, ...props }: React.ComponentProps<"svg">) {
   return (
     <svg
       className={className}
@@ -31,7 +31,5 @@ export function Logo({ className, ...props }: React.ComponentProps<'svg'>) {
         mask="url(#logoMask)"
       />
     </svg>
-  )
+  );
 }
-
-

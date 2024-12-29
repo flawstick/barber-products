@@ -12,6 +12,7 @@ import Link from "next/link";
 import { Cart } from "@/components/cart";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Sidebar } from "@/components/sidebar";
 
 export function SiteHeader() {
   return (
@@ -24,7 +25,7 @@ export function SiteHeader() {
             href="/"
             className="flex items-center gap-2 px-2 text-xl font-bold tracking-tighter"
           >
-            RazStyle Essentials
+            RazEssentials
           </Link>
         </div>
         <nav className="text-muted-foreground hover:[&_a]:text-foreground hidden items-center gap-6 text-sm font-medium md:flex [&_a]:transition-colors">
@@ -53,45 +54,5 @@ function SearchBar({ className }: { className?: string }) {
         className="h-8 rounded-lg pl-8 text-sm sm:w-[200px] md:w-[200px] lg:w-[200px]"
       />
     </form>
-  );
-}
-
-function Sidebar() {
-  return (
-    <Sheet>
-      <Tooltip>
-        <SheetTrigger asChild>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="border-border size-8 shrink-0 border md:hidden"
-            >
-              <Menu className="size-4" />
-              <span className="sr-only">Menu</span>
-            </Button>
-          </TooltipTrigger>
-        </SheetTrigger>
-        <TooltipContent align="start">Menu</TooltipContent>
-        <SheetContent
-          side="left"
-          className="flex w-full flex-col p-4 pt-12 md:w-3/4"
-        >
-          <SearchBar className="w-full sm:hidden" />
-          <Button className="justify-start" variant="ghost">
-            <Link href="/">Products</Link>
-          </Button>
-          <Button className="justify-start" variant="ghost">
-            <Link href="/about">About</Link>
-          </Button>
-          <Button className="justify-start" variant="ghost">
-            <Link href="/services">Services</Link>
-          </Button>
-          <Button className="justify-start" variant="ghost">
-            <Link href="/contact">Contact</Link>
-          </Button>
-        </SheetContent>
-      </Tooltip>
-    </Sheet>
   );
 }

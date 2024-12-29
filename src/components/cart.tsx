@@ -1,11 +1,15 @@
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+} from "@/components/ui/sheet";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export function Cart() {
   return (
@@ -44,7 +48,7 @@ export function Cart() {
         </SheetContent>
       </Tooltip>
     </Sheet>
-  )
+  );
 }
 
 function CartIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
@@ -87,7 +91,5 @@ function CartIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
         </clipPath>
       </defs>
     </svg>
-  )
+  );
 }
-
-

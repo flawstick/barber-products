@@ -1,20 +1,20 @@
-import { ProductBuyForm } from '@/components/product-buy-form'
-import { productSchema } from '@/lib/schema'
-import Image from 'next/image'
-import Link from 'next/link'
-import { z } from 'zod'
+import { ProductBuyForm } from "@/components/product-buy-form";
+import { productSchema } from "@/lib/schema";
+import Image from "next/image";
+import Link from "next/link";
+import { z } from "zod";
 
 export function ProductListThumbnail({
   product,
 }: {
-  product: z.infer<typeof productSchema>
+  product: z.infer<typeof productSchema>;
 }) {
   return (
     <Link href={`/products/${product.id}`} className="group">
       <div className="bg-card rounded-lg p-4 border border-border transition-shadow hover:shadow-md animate-fade-in">
         <div className="relative aspect-square overflow-hidden rounded-xl">
           <Image
-            src={product.images?.[0] ?? '/placeholder.svg'}
+            src={product.images?.[0] ?? "/placeholder.svg"}
             alt={product.name}
             layout="fill"
             objectFit="cover"
@@ -34,11 +34,9 @@ export function ProductListThumbnail({
         </div>
       </div>
     </Link>
-  )
+  );
 }
 
 export function ProductListThumbnailSkeleton() {
-  return <div className="bg-muted aspect-square rounded-xl animate-pulse" />
+  return <div className="bg-muted aspect-square rounded-xl animate-pulse" />;
 }
-
-
